@@ -24,6 +24,8 @@ spec:
   interval: 15m
   timeout: 5m
   releaseName: external-dns
+  install:
+    createNamespace: true
   values:
     sources:
     - contour-httpproxy
