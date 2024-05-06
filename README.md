@@ -13,6 +13,16 @@ This is an example implementation of installing TAP on AKS using Flux. In this c
 
 # Setup
 
+## Create cluster groups
+
+This example will not walk through creating the cluster groups or cluster but here is the setup that this is tested with. Cluster groups with clusters shown below
+
+* tap-flux-core
+  * tap-flux-build
+  * tap-flux-view
+* tap-dev-env
+  * tap-flux-dev-run
+
 ## enable OIDC issuer 
 
 this may already be done depending how how the clusters were created. if they were created through TMC AKS LCM. run the below command on each cluster.
@@ -79,4 +89,6 @@ azwi serviceaccount create phase federated-identity \
   --service-account-issuer-url "${SERVICE_ACCOUNT_ISSUER}"
 
 ```
+
+## Enable gitops on the cluster groups for your clusters
 
