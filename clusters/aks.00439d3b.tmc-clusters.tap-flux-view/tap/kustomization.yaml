@@ -5,3 +5,4 @@ generatorOptions:
 
 resources:
 - ../../../apps/base/tap
+- values.yml

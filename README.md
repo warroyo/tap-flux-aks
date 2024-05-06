@@ -146,7 +146,7 @@ In this install we are not using relocated images. This example uses direct acce
 export REGISTRY_USER='user'
 export REGISTRY_PASS='[password]'
 export REGISTRY_HOST='registry.tanzu.vmware.com'
-export REGISTRY_CONFIG=$(ytt -f cli/templates/dockerconfig.yml --data-value="registry.username=$REGISTRY_USER" --data-value="registry.hostname=$REGISTRY_HOST" --data-value="registry.password=$REGISTRY_PASS" --output=json | jq -c -r .dockerconfigjson | base64)
+export REGISTRY_CONFIG=$(ytt -f cli/templates/dockerconfig.yml --data-value="registry.username=$REGISTRY_USER" --data-value="registry.hostname=$REGISTRY_HOST" --data-value="registry.password=$REGISTRY_PASS" --output=json | jq -c -r .dockerconfigjson)
 
 az keyvault secret set --vault-name $KEYVAULT_NAME --name "tap-registry-creds" --value $REGISTRY_CONFIG
 
