@@ -2,6 +2,7 @@ apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
   name: tap-install
+  namespace: tap-install
 spec:
   provider:
     # provider type: azure keyvault
@@ -9,7 +10,14 @@ spec:
       # azure tenant ID, see: https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant
       tenantId: "d3bc2180-xxxx-xxxx-xxxx-154105743342"
       # URL of your vault instance, see: https://docs.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates
-      vaultUrl: "https://default-env.vault.azure.net"
+      vaultUrl: "https://tap-flux-core-kv.vault.azure.net"
       serviceAccountRef:
         name: tap-akv-reader
-        
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    azure.workload.identity/client-id: 20220b3c-xxxxxx-8846aa958eab
+  name: tap-akv-reader
+  namespace: tap-install

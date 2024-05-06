@@ -4,6 +4,7 @@ generatorOptions:
   disableNameSuffixHash: true
 
 resources:
-- ../../../apps/base/cluster-name-secret/
-- ../../../apps/base/external-secrets
-- ../../../apps/base/namespaces
+- ../../../apps/base/tap-secret-store
+
+patchesStrategicMerge:
+- secret-store.yml
