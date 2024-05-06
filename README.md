@@ -128,7 +128,7 @@ export CLUSTER_NAME="cluster-name"
 export CLUSTER_RG="cluster-resource-group"
 export SERVICE_ACCOUNT_ISSUER=$(az aks show --resource-group $CLUSTER_RG --name $CLUSTER_NAME --query "oidcIssuerProfile.issuerUrl" -otsv)
 export SERVICE_ACCOUNT_NAMESPACE="external-dns"
-export SERVICE_ACCOUNT_NAME="default"
+export SERVICE_ACCOUNT_NAME="external-dns"
 
 azwi serviceaccount create phase federated-identity \
   --aad-application-name "${APPLICATION_NAME}" \
