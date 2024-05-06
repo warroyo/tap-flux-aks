@@ -4,5 +4,5 @@ generatorOptions:
   disableNameSuffixHash: true
 
 resources:
-- ../../apps/base/cluster-name-secret/
-- ../../apps/base/external-secrets
+- ../../../apps/base/cluster-name-secret/
+- ../../../apps/base/external-secrets
