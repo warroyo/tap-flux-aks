@@ -34,6 +34,8 @@ spec:
     txtOwnerId: ${cluster_name}
     azure:
       useWorkloadIdentityExtension: true
+      resourceGroup: main-dns
+      subscriptionId: 31f60aa7-0ea5-47af-85b2-27e792a36288
     serviceAccount:
       annotations:
         azure.workload.identity/client-id: da9cfb83-0587-4e3a-b472-8354b2bad2d5
