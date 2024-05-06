@@ -1,0 +1,29 @@
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageRepository
+metadata:
+  name: tap-pkgr
+  namespace: tap-install
+spec:
+  fetch:
+    imgpkgBundle:
+      image: registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:1.9.0
+
+
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: tap
+  namespace: tap-install
+spec:
+  serviceAccountName: tap-installer-sa
+  packageRef:
+    refName: tap.tanzu.vmware.com
+    versionSelection:
+      constraints: 1.9.0
+  values:
+    - secretRef:
+        name: tap-values
+    - secretRef:
+        name: tap-sensitive-values

@@ -137,5 +137,34 @@ azwi serviceaccount create phase federated-identity \
   --service-account-issuer-url "${SERVICE_ACCOUNT_ISSUER}"
 ```
 
+
+## Create a registry credential in AKV for TAP install
+
+In this install we are not using relocated images. This example uses direct access to tanzu net.
+
+```bash
+export REGISTRY_USER='user'
+export REGISTRY_PASS='[password]'
+export REGISTRY_HOST='registry.tanzu.vmware.com'
+export REGISTRY_CONFIG=$(ytt -f cli/templates/dockerconfig.yml --data-value="registry.username=$REGISTRY_USER" --data-value="registry.hostname=$REGISTRY_HOST" --data-value="registry.password=$REGISTRY_PASS" --output=json | jq -c -r .dockerconfigjson | base64)
+
+az keyvault secret set --vault-name $KEYVAULT_NAME --name "tap-registry-creds" --value $REGISTRY_CONFIG
+
+
+```
+
+
+## Create any senstive values files needed and put them in AKV
+
+in this example there is only one needed and that is for the view cluster. you can place any tap values files with senstive data in the `cli/sensitive-values` folder.
+
+```bash
+export TAP_VIEW_VALUES=$(cat cli/sensitive-values/sensitive-view-values.yml | base64)
+
+az keyvault secret set --vault-name $KEYVAULT_NAME --name "tap-view-values" --value $TAP_VIEW_VALUES
+```
+
+
+
 ## Enable gitops on the cluster groups for your clusters
 

@@ -1,0 +1,15 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:json", "json")
+---
+#@ def install_registry_auth(registry):
+#@  return {
+#@    "auths": {
+#@      registry.hostname: {
+#@        "username": registry.username,
+#@        "password": registry.password
+#@      }
+#@    }
+#@  }
+#@ end
+
+dockerconfigjson: #@ install_registry_auth(data.values.registry)

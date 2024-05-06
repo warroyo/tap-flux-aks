@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tap-values
+  namespace: tap-install
+stringData:
+  values.yaml: |
+    appliveview:
+      ingressEnabled: true
+    ceip_policy_disclosed: true
+    metadata_store:
+      ns_for_export_app_cert: '*'
+    profile: view
+    shared:
+      ingress_domain: view.tap.azure.warroyo.com
+      ingress_issuer: letsencrypt-prod
+    tap_gui:
+      app_config:
+        auth:
+          environment: development
+          loginPage:
+            github:
+              message: Enter with your GitHub account
+              title: Github Login
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: tap-sensitive-values
+  namespace: tap-install
+spec:
+  secretStoreRef:
+    name: tap-install-secrets
+    kind: SecretStore
+  refreshInterval: "1m"
+  data:
+    - secretKey: sensitive-tap-values.yaml
+      remoteRef:
+        key: tap-view-values
