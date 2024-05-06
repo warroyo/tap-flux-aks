@@ -28,7 +28,7 @@ This example will not walk through creating the cluster groups or cluster but he
 this may already be done depending how how the clusters were created. if they were created through TMC AKS LCM. run the below command on each cluster.
 
 ```bash
-az aks update -g myResourceGroup -n myAKSCluster --enable-oidc-issuer 
+az aks update -g myResourceGroup -n myAKSCluster --enable-oidc-issuer --enable-workload-identity
 ```
 
 ## Create an AKV to store our secrets
