@@ -90,5 +90,52 @@ azwi serviceaccount create phase federated-identity \
 
 ```
 
+## Create a AAD workload identity for external DNS
+
+```bash
+export APPLICATION_NAME="dns-flux-tap"
+```
+
+```bash
+azwi serviceaccount create phase app --aad-application-name "${APPLICATION_NAME}"
+```
+
+```bash
+export APPLICATION_CLIENT_ID="$(az ad sp list --display-name "${APPLICATION_NAME}" --query '[0].appId' -otsv)"
+export AZURE_DNS_ZONE_RESOURCE_GROUP="main-dns"
+export AZURE_DNS_ZONE="azure.warroyo.com"
+export DNS_ID=$(az network dns zone show --name "${AZURE_DNS_ZONE}" \
+  --resource-group "${AZURE_DNS_ZONE_RESOURCE_GROUP}" --query "id" --output tsv)
+export RESOURCE_GROUP_ID=$(az group show --name "${AZURE_DNS_ZONE_RESOURCE_GROUP}" --query "id" --output tsv)
+```
+
+```bash
+az role assignment create --role "DNS Zone Contributor" \
+  --assignee "${APPLICATION_CLIENT_ID}" --scope "${DNS_ID}"
+
+az role assignment create --role "Reader" \
+  --assignee "${APPLICATION_CLIENT_ID}" --scope "${RESOURCE_GROUP_ID}"
+
+```  
+
+
+## federate the new app with the k8s service account
+
+this needs to be run with each clusters issuer url
+
+```bash
+export CLUSTER_NAME="cluster-name"
+export CLUSTER_RG="cluster-resource-group"
+export SERVICE_ACCOUNT_ISSUER=$(az aks show --resource-group $CLUSTER_RG --name $CLUSTER_NAME --query "oidcIssuerProfile.issuerUrl" -otsv)
+export SERVICE_ACCOUNT_NAMESPACE="external-dns"
+export SERVICE_ACCOUNT_NAME="default"
+
+azwi serviceaccount create phase federated-identity \
+  --aad-application-name "${APPLICATION_NAME}" \
+  --service-account-namespace "${SERVICE_ACCOUNT_NAMESPACE}" \
+  --service-account-name "${SERVICE_ACCOUNT_NAME}" \
+  --service-account-issuer-url "${SERVICE_ACCOUNT_ISSUER}"
+```
+
 ## Enable gitops on the cluster groups for your clusters
 

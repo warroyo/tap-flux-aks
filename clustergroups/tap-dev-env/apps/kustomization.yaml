@@ -4,4 +4,7 @@ generatorOptions:
   disableNameSuffixHash: true
 
 resources:
-- install.yml
+- ../../../apps/base/tap-secret-store
+
+patchesStrategicMerge:
+- secret-store.yml

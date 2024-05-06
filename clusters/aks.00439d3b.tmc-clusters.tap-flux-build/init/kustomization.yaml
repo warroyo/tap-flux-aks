@@ -4,4 +4,4 @@ generatorOptions:
   disableNameSuffixHash: true
 
 resources:
-- install.yml
+- ../../../apps/base/clus

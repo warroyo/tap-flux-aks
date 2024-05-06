@@ -4,4 +4,6 @@ generatorOptions:
   disableNameSuffixHash: true
 
 resources:
-- install.yml
+- ../../../apps/base/cluster-name-secret/
+- ../../../apps/base/external-secrets
+- ../../../apps/base/namespaces
