@@ -37,6 +37,7 @@ spec:
       resourceGroup: main-dns
       subscriptionId: 31f60aa7-0ea5-47af-85b2-27e792a36288
       tenantId: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
+      aadClientId: da9cfb83-0587-4e3a-b472-8354b2bad2d5
     podLabels:
       azure.workload.identity/use: "true"
     serviceAccount:
