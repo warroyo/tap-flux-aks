@@ -43,5 +43,3 @@ spec:
       automountServiceAccountToken: true
       annotations:
         azure.workload.identity/client-id: d0a53e32-9176-4de7-b5d5-894cd42e1592
-      labels:
-        azure.workload.identity/use: "true"
