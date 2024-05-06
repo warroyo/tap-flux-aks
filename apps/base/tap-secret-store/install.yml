@@ -7,6 +7,7 @@ spec:
   provider:
     # provider type: azure keyvault
     azurekv:
+      authType: WorkloadIdentity
       # azure tenant ID, see: https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant
       tenantId: "d3bc2180-xxxx-xxxx-xxxx-154105743342"
       # URL of your vault instance, see: https://docs.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates
