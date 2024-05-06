@@ -31,7 +31,7 @@ metadata:
   namespace: tap-install
 spec:
   secretStoreRef:
-    name: tap-install-secrets
+    name: tap-install
     kind: SecretStore
   refreshInterval: "1m"
   data:
