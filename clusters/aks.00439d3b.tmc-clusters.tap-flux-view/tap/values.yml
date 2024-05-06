@@ -6,6 +6,8 @@ metadata:
   namespace: tap-install
 stringData:
   values.yaml: |
+    excluded_packages:
+      - fluxcd.source.controller.tanzu.vmware.com
     appliveview:
       ingressEnabled: true
     ceip_policy_disclosed: true
