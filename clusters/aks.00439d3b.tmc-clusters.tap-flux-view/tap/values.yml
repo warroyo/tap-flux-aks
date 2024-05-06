@@ -37,4 +37,5 @@ spec:
   data:
     - secretKey: sensitive-tap-values.yaml
       remoteRef:
+        decodingStrategy: Base64
         key: tap-view-values
