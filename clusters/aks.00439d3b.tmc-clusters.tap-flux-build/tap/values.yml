@@ -22,7 +22,7 @@ stringData:
       additional_sources:
       - git:
           ref: origin/main
-          subPath: clusters/$cluster_name/ns-provisioner/config
+          subPath: clusters/${cluster_name}/ns-provisioner/config
           url: https://github.com/warroyo/tap-flux-aks
         path: _ytt_lib/testing-scanning-supplychain-parameterized-setup
       controller: false
@@ -32,7 +32,7 @@ stringData:
           - gitops-secret
       gitops_install:
         ref: origin/main
-        subPath: clusters/$cluster_name/ns-provisioner/namespaces
+        subPath: clusters/${cluster_name}/ns-provisioner/namespaces
         url: https://github.com/warroyo/tap-flux-aks
     supply_chain: testing_scanning
     ootb_supply_chain_testing_scanning:
