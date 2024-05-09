@@ -189,7 +189,12 @@ az keyvault secret set --vault-name $KEYVAULT_NAME --name "supplychain-registry-
 
 ## create the gitops repo credential
 
+This is used to create PRs in the github repo
 
+```bash
+az keyvault secret set --vault-name $KEYVAULT_NAME --name "github-user" --value "username"
+az keyvault secret set --vault-name $KEYVAULT_NAME --name "github-pat" --value "pat"
+```
 
 ## Enable gitops on the cluster groups for your clusters
 
