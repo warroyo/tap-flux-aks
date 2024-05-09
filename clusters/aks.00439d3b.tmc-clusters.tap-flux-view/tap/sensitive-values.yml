@@ -5,5 +5,6 @@ metadata:
   namespace: tap-install
 spec:
   values:
-    - secretRef:
+    - $patch: merge
+      secretRef:
         name: tap-sensitive-values
