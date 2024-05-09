@@ -4,6 +4,4 @@ generatorOptions:
   disableNameSuffixHash: true
 
 resources:
-- ../../../apps/base/tap
-- ../../../apps/base/tap-overlays
-- values.yml
+- ../../../apps/base/cluster-issuers
