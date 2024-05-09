@@ -25,5 +25,3 @@ spec:
   values:
     - secretRef:
         name: tap-values
-    - secretRef:
-        name: tap-sensitive-values

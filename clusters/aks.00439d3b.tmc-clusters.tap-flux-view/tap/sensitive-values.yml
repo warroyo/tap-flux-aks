@@ -1,0 +1,9 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: tap
+  namespace: tap-install
+spec:
+  values:
+    - secretRef:
+        name: tap-sensitive-values

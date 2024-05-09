@@ -7,3 +7,6 @@ resources:
 - ../../../apps/base/tap
 - ../../../apps/base/tap-overlays
 - values.yml
+
+patchesStrategicMerge:
+- senstive-values.yml
