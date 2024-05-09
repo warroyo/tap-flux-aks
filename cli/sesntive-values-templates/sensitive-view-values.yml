@@ -1,0 +1,15 @@
+tap_gui:
+  app_config:
+    auth:
+      providers:
+        github:
+          development:
+            clientId: <client-id>
+            clientSecret: <clinet-secret>
+    kubernetes:
+      serviceLocatorMethod:
+        type: 'multiTenant'
+      clusterLocatorMethods:
+        - type: 'config'
+          clusters:
+          ## Popluated by ytt

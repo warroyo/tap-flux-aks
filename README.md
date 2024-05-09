@@ -198,3 +198,14 @@ az keyvault secret set --vault-name $KEYVAULT_NAME --name "github-pat" --value "
 
 ## Enable gitops on the cluster groups for your clusters
 
+
+
+## Add clusters to view values
+
+We need to add run and build clusters to the view values so that the view cluster can see the supply chain and running workloads.
+
+run for build and run clusters
+
+```bash
+export CLUSTER_NAME="name"
+export

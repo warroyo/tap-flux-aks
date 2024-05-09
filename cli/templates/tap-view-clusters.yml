@@ -1,0 +1,20 @@
+#@ load("@ytt:overlay", "overlay")
+#@ load("@ytt:data", "data")
+
+#@overlay/match by=overlay.all
+---
+tap_gui:
+  app_config:
+    kubernetes:
+      clusterLocatorMethods:
+      - type: 'config'
+        #@overlay/match-child-defaults missing_ok=True
+        clusters:
+        #@overlay/match by="name"
+        - url: #@ data.values.clusters[0].cluster.server
+          name: #@ data.values.clusters[0].name
+          authProvider: serviceAccount
+          serviceAccountToken: #@ data.values.sa_token
+          skipTLSVerify: false
+          caData: #@ data.values.clusters[0].cluster["certificate-authority-data"]
+          skipMetricsLookup: true
