@@ -6,6 +6,5 @@ generatorOptions:
 resources:
 - ../../../apps/base/tap
 - ../../../apps/base/tap-overlays
-- ../../../apps/base/cluster-issuers
 - secrets.yml
 - values.yml

@@ -41,6 +41,8 @@ metadata:
   name: post-tap
   namespace: tanzu-continuousdelivery-resources
 spec:
+  dependsOn:
+    - name: tap
   interval: 10m0s
   path: clusters/${cluster_name}/post-tap
   prune: true
