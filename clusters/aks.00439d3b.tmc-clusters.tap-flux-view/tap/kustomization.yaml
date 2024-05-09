@@ -8,5 +8,15 @@ resources:
 - ../../../apps/base/tap-overlays
 - values.yml
 
-patchesStrategicMerge:
-- sensitive-values.yml
+patches:
+  - target:
+      group: packaging.carvel.dev
+      version: v1alpha1
+      kind: PackageInstall
+      name: tap
+    patch: |-
+      - op: add
+        path: /spec/values/-
+        value:
+          secretRef:
+            name: tap-sensitive-values
