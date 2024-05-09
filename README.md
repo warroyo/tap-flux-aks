@@ -90,7 +90,7 @@ azwi serviceaccount create phase federated-identity \
 
 ```
 
-## Create a AAD workload identity for external DNS
+## Create a AAD workload identity for external DNS & cert manager
 
 ```bash
 export APPLICATION_NAME="dns-flux-tap"
@@ -135,6 +135,13 @@ azwi serviceaccount create phase federated-identity \
   --service-account-namespace "${SERVICE_ACCOUNT_NAMESPACE}" \
   --service-account-name "${SERVICE_ACCOUNT_NAME}" \
   --service-account-issuer-url "${SERVICE_ACCOUNT_ISSUER}"
+
+# for cert manager
+azwi serviceaccount create phase federated-identity \
+  --aad-application-name "${APPLICATION_NAME}" \
+  --service-account-namespace "cert-manager" \
+  --service-account-name "cert-manager" \
+  --service-account-issuer-url "${SERVICE_ACCOUNT_ISSUER}"
 ```
 
 
@@ -166,20 +173,23 @@ export TAP_VIEW_VALUES=$(cat cli/sensitive-values/sensitive-view-values.yml | ba
 az keyvault secret set --vault-name $KEYVAULT_NAME --name "tap-view-values" --value $TAP_VIEW_VALUES
 ```
 
-Build cluster:
-```bash
-export TAP_VIEW_VALUES=$(cat cli/sensitive-values/sensitive-buil-values.yml | base64)
 
-az keyvault secret set --vault-name $KEYVAULT_NAME --name "tap-build-values" --value $TAP_VIEW_VALUES
-```
+## Create supply chain registry secret
 
-Run cluster
+this is the secret that is used by the supply chain to push images etc.
 
 ```bash
-export TAP_VIEW_VALUES=$(cat cli/sensitive-values/sensitive-run-values.yml | base64)
+export REGISTRY_USER='user'
+export REGISTRY_PASS='[password]'
+export REGISTRY_HOST='your-registry'
+export REGISTRY_CONFIG=$(ytt -f cli/templates/dockerconfig.yml --data-value="registry.username=$REGISTRY_USER" --data-value="registry.hostname=$REGISTRY_HOST" --data-value="registry.password=$REGISTRY_PASS" --output=json | jq -c -r .dockerconfigjson)
 
-az keyvault secret set --vault-name $KEYVAULT_NAME --name "tap-run-values" --value $TAP_VIEW_VALUES
+az keyvault secret set --vault-name $KEYVAULT_NAME --name "supplychain-registry-creds" --value $REGISTRY_CONFIG
 ```
+
+## create the gitops repo credential
+
+
 
 ## Enable gitops on the cluster groups for your clusters
 
