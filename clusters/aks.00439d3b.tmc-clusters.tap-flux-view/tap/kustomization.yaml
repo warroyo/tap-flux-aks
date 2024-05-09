@@ -9,4 +9,4 @@ resources:
 - values.yml
 
 patchesStrategicMerge:
-- senstive-values.yml
+- sensitive-values.yml
