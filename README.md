@@ -206,6 +206,7 @@ We need to add run and build clusters to the view values so that the view cluste
 
 run for build and run clusters
 
+change into the cluster context prior to running
+
 ```bash
-export CLUSTER_NAME="name"
-export
+export CLUSTER_TOKEN=$(kubectl -n tap-gui get secret $(kubectl -n tap-gui get sa tap-gui-viewer -o=json | jq -r '.secrets[0].name') -o=json | jq -r '.data["token"]' | base64 --decode)
