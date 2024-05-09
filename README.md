@@ -154,9 +154,11 @@ az keyvault secret set --vault-name $KEYVAULT_NAME --name "tap-registry-creds" -
 ```
 
 
-## Create any senstive values files needed and put them in AKV
+## Create any senstive tap values files needed and put them in AKV
 
 in this example there is only one needed and that is for the view cluster. you can place any tap values files with senstive data in the `cli/sensitive-values` folder.
+
+view cluster:
 
 ```bash
 export TAP_VIEW_VALUES=$(cat cli/sensitive-values/sensitive-view-values.yml | base64)
@@ -164,7 +166,20 @@ export TAP_VIEW_VALUES=$(cat cli/sensitive-values/sensitive-view-values.yml | ba
 az keyvault secret set --vault-name $KEYVAULT_NAME --name "tap-view-values" --value $TAP_VIEW_VALUES
 ```
 
+Build cluster:
+```bash
+export TAP_VIEW_VALUES=$(cat cli/sensitive-values/sensitive-buil-values.yml | base64)
 
+az keyvault secret set --vault-name $KEYVAULT_NAME --name "tap-build-values" --value $TAP_VIEW_VALUES
+```
+
+Run cluster
+
+```bash
+export TAP_VIEW_VALUES=$(cat cli/sensitive-values/sensitive-run-values.yml | base64)
+
+az keyvault secret set --vault-name $KEYVAULT_NAME --name "tap-run-values" --value $TAP_VIEW_VALUES
+```
 
 ## Enable gitops on the cluster groups for your clusters
 

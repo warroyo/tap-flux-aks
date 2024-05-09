@@ -6,6 +6,10 @@ metadata:
   namespace: tap-install
 stringData:
   values.yaml: |
+    package_overlays:
+      - name: cert-manager
+        secrets:
+          - name: cert-man-azure-wi
     excluded_packages:
       - fluxcd.source.controller.tanzu.vmware.com
     appliveview:
