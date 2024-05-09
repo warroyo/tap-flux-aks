@@ -3,5 +3,4 @@ kind: Kustomization
 generatorOptions:
   disableNameSuffixHash: true
 
-resources:
-- ../../../apps/base/cluster-issuers
+resources: []
